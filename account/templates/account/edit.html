@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}用户扩展信息编辑{% endblock %}
+{% block content %}
+    <div id="content">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="notification {{ message.tags }}">
+                        <span class="close-notification"><i class="icon-remove-sign"></i></span>
+                        <p>
+                            {{ message|safe }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <h1>Edit your account</h1>
+            <p>You can edit your account using the following form:</p>
+            <form action="." method="post" enctype="multipart/form-data" novalidate>
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" value="Save changes"></p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}博客列表{% endblock %}
+{% block content %}
+    <div id="content">
+        <div id="breadcrumb">
+            <!-- breadcrumb starts-->
+            <div class="container">
+                <div class="one-half">
+                    <h4>
+                        {% if tag %}
+                        含有"{{ tag.name }}"标签的博客列表
+                        {% else %}
+                        博客列表
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="one-half">
+                    <nav id="breadcrumbs">
+                        <!--breadcrumb nav starts-->
+                        <ul>
+                            <li>You are here:</li>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li>Blog</li>
+                        </ul>
+                    </nav>
+                    <!--breadcrumb nav ends -->
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs ends -->
+        <div class="container">
+            <div class="one">
+                <div class="three-fourth">
+
+                    {% for post in all_published_posts %}
+                        <div class="blog-post layout-1">
+                            <div class="permalink">
+                                <h4><a href="#">{{ post.title }}</a></h4>
+                            </div>
+                            <ul class="post-meta">
+                                <li><i class="icon-time"></i>{{ post.publish|date:"Y/m/d" }}</li>
+                                <!-- Date -->
+                                <li><i class="icon-user"></i><a href="#">{{ post.author.first_name }}</a></li>
+                                <!-- Author -->
+                                <li><i class="icon-tags"></i>
+                                    {% for tag in post.tags.all %}
+                                        <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}</a>
+                                        {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </li>
+                                <!-- Category -->
+                                <li><i class="icon-comments"></i><a href="#">{{ post.comments.count }}</a></li>
+                                <!-- Comments -->
+                            </ul>
+                            <!-- End post-meta -->
+                            <div class="post-intro">
+                                {{ post.body|safe|truncatechars_html:100 }}
+                                <br/>
+                                <p>
+                                    <a href="{{ post.get_absolute_url }}" class="button simple-grey small round">查看详情</a>
+                                </p>
+                            </div>
+                        </div>
+                    {% empty %}
+                        暂时还未发表任何博客
+                    {% endfor %}
+
+                    {% include 'pagination.html' with page=page_obj %}
+                </div>
+                {% include 'blog/right-side-bar.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

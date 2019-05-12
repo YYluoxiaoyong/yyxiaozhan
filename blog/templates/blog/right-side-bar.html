@@ -1,0 +1,73 @@
+{% load blog_tags %}
+<div class="one-fourth sidebar right">
+    <div class="widget">
+        <nav class="top-search">
+            <!-- search starts-->
+            <form action="404-error.html" method="get">
+                <button class="search-btn"></button>
+                <input class="search-field" type="text" onblur="if(this.value=='')this.value='Search';"
+                       onfocus="if(this.value=='Search')this.value='';" value="Search"/>
+            </form>
+        </nav>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">博客统计信息</h4>
+        <p>
+            截至{% now "Y年m月d日 h:m" %}, 已发布了{% total_posts %}篇文章
+        </p>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">最新发表博文TOP5</h4>
+        {% show_latest_posts 5 %}
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">最多评论博文TOP5</h4>
+        {% get_most_commented_posts as most_commented_posts %}
+        <ul class="sidebar-nav">
+            {% for post in most_commented_posts %}
+            <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}"><i class="icon-file-text-alt"></i>{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">Archive</h4>
+        <ul class="sidebar-nav">
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>July 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>June 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>May 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>April 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>March 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>February 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>January 2013</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>December 2012</a></li>
+            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>November 2012</a></li>
+        </ul>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">Popular Tags</h4>
+        <ul class="popular-tags">
+            <li><a href="#"><i class="icon-tag"></i>AJAX</a></li>
+            <li><a href="#"><i class="icon-tag"></i>HTML5</a></li>
+            <li><a href="#"><i class="icon-tag"></i>jQuery</a></li>
+            <li><a href="#"><i class="icon-tag"></i>CSS3</a></li>
+            <li><a href="#"><i class="icon-tag"></i>PHP</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Wordpress</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Photoshop</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Uncategorized</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Ruby</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Drupal</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Inspiration</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Joomla</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Design</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Responsive</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Envato</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Wallpapers</a></li>
+            <li><a href="#"><i class="icon-tag"></i>Fonts</a></li>
+        </ul>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">Flicrk Photos</h4>
+        <div class="flickr-widget inner">
+        </div>
+    </div>
+</div>

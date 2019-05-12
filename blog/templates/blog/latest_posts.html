@@ -1,0 +1,6 @@
+<ul class="sidebar-nav">
+    {% for post in latest_posts %}
+        <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}"><i
+                class="icon-file-text"></i>{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
