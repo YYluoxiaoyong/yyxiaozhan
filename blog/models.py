@@ -50,7 +50,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_comments')
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children_comments')
+    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children_comments', null=True)
     body = RichTextUploadingField(default='发表您的评论')
     created = models.DateTimeField(auto_now_add=True, db_index=True)
     updated = models.DateTimeField(auto_now=True)

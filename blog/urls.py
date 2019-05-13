@@ -5,6 +5,7 @@ from .views import PostMonthArchiveView
 from .views import PostWeekArchiveView
 from .views import PostDayArchiveView
 from .views import PostTodayArchiveView
+from .views import CommentCreate, CommentReply, ThanksTemplateView
 
 app_name = 'blog'
 urlpatterns = [
@@ -35,4 +36,8 @@ urlpatterns = [
     path('today/',
          PostTodayArchiveView.as_view(),
          name="archive_today"),
+
+    path('comment/create/<int:pk>/', CommentCreate.as_view(), name='comment_create'),
+    path('comment/reply/<int:pk>/', CommentReply.as_view(), name='comment_reply'),
+    path('thanks/', ThanksTemplateView.as_view(), name='thanks'),
 ]

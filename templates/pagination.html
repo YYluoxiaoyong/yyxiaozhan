@@ -10,7 +10,7 @@
         {% endfor %}
 
         {% if page.has_next %}
-            <li><a href="#">Next</a></li>
+            <li><a href="?page={{ page.next_page_number }}">Next</a></li>
         {% endif %}
     </ul>
     <div class="clearfix">

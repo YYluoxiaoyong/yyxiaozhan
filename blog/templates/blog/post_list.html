@@ -9,9 +9,11 @@
                 <div class="one-half">
                     <h4>
                         {% if tag %}
-                        含有"{{ tag.name }}"标签的博客列表
+                            含有"{{ tag.name }}"标签的博客列表
+                        {% elif month %}
+                            "{{ month|date:"F Y" }}"博客归档
                         {% else %}
-                        博客列表
+                            博客列表
                         {% endif %}
                     </h4>
                 </div>
@@ -36,7 +38,7 @@
                     {% for post in all_published_posts %}
                         <div class="blog-post layout-1">
                             <div class="permalink">
-                                <h4><a href="#">{{ post.title }}</a></h4>
+                                <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
                             </div>
                             <ul class="post-meta">
                                 <li><i class="icon-time"></i>{{ post.publish|date:"Y/m/d" }}</li>
@@ -52,6 +54,8 @@
                                 <!-- Category -->
                                 <li><i class="icon-comments"></i><a href="#">{{ post.comments.count }}</a></li>
                                 <!-- Comments -->
+                                <li><i class="icon-eye-open"></i><a href="#">{{ post.explored }}</a></li>
+                                <!-- Explored -->
                             </ul>
                             <!-- End post-meta -->
                             <div class="post-intro">

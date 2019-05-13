@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}评论回复{% endblock %}
+{% block content %}
+    <div id="content">
+        <div class="container">
+            <div class="one">
+                <blockquote>
+                    <h4>您正在回复{{ target.author.first_name }}于{{ target.created }}发表的评论，
+                        该评论指向博文<a href="{{ target.post.get_absolute_url }}">"{{ target.post.title }}"</a></h4>
+                </blockquote>
+            </div>
+            <section class="one">
+                <form action="." id="contact-form" class="simple-form " method="post">{% csrf_token %}
+                    <div id="error-field">
+                    </div>
+                    <fieldset>
+                        <div class="input-title">
+                            Your Message:
+                        </div>
+                        <textarea cols="60" rows="12" title="Your Message" class="text requiredField"
+                                  name="body"></textarea>
+                    </fieldset>
+                    <div class="three-fourth">
+                        <input type="submit" value="Send message" class="button big grey round"/>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+

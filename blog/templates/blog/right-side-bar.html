@@ -25,49 +25,30 @@
         {% get_most_commented_posts as most_commented_posts %}
         <ul class="sidebar-nav">
             {% for post in most_commented_posts %}
-            <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}"><i class="icon-file-text-alt"></i>{{ post.title }}</a></li>
+            <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
+                <i class="icon-file-text-alt"></i>{{ post.title }}</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
     <div class="widget">
-        <h4 class="widget-title">Archive</h4>
+        <h4 class="widget-title">博文归档</h4>
+        {% get_pub_date_list as pub_date_list %}
         <ul class="sidebar-nav">
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>July 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>June 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>May 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>April 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>March 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>February 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>January 2013</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>December 2012</a></li>
-            <li><a href="#" title="Some Title"><i class="icon-angle-right"></i>November 2012</a></li>
+            {% for year, month in pub_date_list %}
+            <li><a href="{% url 'blog:archive_month' year month %}" title="{{ year }}年{{ month }}月">
+                <i class="icon-angle-right"></i>{{ year }}年{{ month }}月</a>
+            </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="widget">
-        <h4 class="widget-title">Popular Tags</h4>
+        <h4 class="widget-title">标签筛选</h4>
+        {% get_all_tags as all_tags %}
         <ul class="popular-tags">
-            <li><a href="#"><i class="icon-tag"></i>AJAX</a></li>
-            <li><a href="#"><i class="icon-tag"></i>HTML5</a></li>
-            <li><a href="#"><i class="icon-tag"></i>jQuery</a></li>
-            <li><a href="#"><i class="icon-tag"></i>CSS3</a></li>
-            <li><a href="#"><i class="icon-tag"></i>PHP</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Wordpress</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Photoshop</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Uncategorized</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Ruby</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Drupal</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Inspiration</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Joomla</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Design</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Responsive</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Envato</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Wallpapers</a></li>
-            <li><a href="#"><i class="icon-tag"></i>Fonts</a></li>
+            {% for tag in all_tags %}
+            <li><a href="{% url "blog:post_list_by_tag" tag.slug %}"><i class="icon-tag"></i>{{ tag.name }}</a></li>
+            {% endfor %}
         </ul>
-    </div>
-    <div class="widget">
-        <h4 class="widget-title">Flicrk Photos</h4>
-        <div class="flickr-widget inner">
-        </div>
     </div>
 </div>
