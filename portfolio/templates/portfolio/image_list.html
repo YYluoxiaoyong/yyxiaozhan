@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}图片列表{% endblock %}
+{% block content %}
+    <div id="content">
+        <div class="container">
+            <div id="content">
+			 		<div id="breadcrumb"><!-- breadcrumb starts-->
+				<div class="container">
+					<div class="one-half">
+						<h4>图片列表</h4>
+					</div>
+					<div class="one-half">
+						<nav id="breadcrumbs"><!--breadcrumb nav starts-->
+						<ul>
+							<li>You are here:</li>
+							<li><a href="{% url 'index' %}">Home</a></li>
+							<li>Portfolio</li>
+						</ul>
+						</nav><!--breadcrumb nav ends -->
+					</div>
+				</div>
+			</div><!--breadcrumbs ends -->
+			<div class="container">
+				<ul id="filterable">
+					<li><a data-categories="*">All</a></li>
+					<li><a data-categories="beijing">北京</a></li>
+					<li><a data-categories="shanghai">上海</a></li>
+					<li><a data-categories="guangzhou">广州</a></li>
+					<li><a data-categories="shenzhen">深圳</a></li>
+				</ul>
+
+				<ul id="portfolio-container" class="four-columns">
+                    {% for image in object_list %}
+					<li class="isotope-item" data-categories="{{ image.category }}">
+						<div class="item-wrapp">
+								<div class="portfolio-item">
+									<a href="{{ image.get_absolute_url }}" class="item-permalink"><i class="icon-link"></i></a>
+									<a href="{{ MEDIA_URL }}{{ image.image }}" data-rel="prettyPhoto" class="item-preview"><i class="icon-zoom-in"></i></a>
+                                    <img src="{{ MEDIA_URL }}{{ image.image }}" alt=""/>
+								</div>
+								<div class="portfolio-item-title">
+									<a href="{{ image.get_absolute_url }}">{{ image.title }}</a>
+									<p>
+										作者：<i class="icon-user"></i>{{ image.user.first_name }}<br>
+                                        上传于：<i class="icon-time"></i>{{ image.created }}
+									</p>
+								</div>
+							</div>
+					</li>
+                    {% endfor %}
+				</ul>
+                {% include 'pagination.html' with page=page_obj %}
+			</div>
+			</div>
+        </div>
+    </div>
+{% endblock %}

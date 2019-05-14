@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'haystack',
     'blog.apps.BlogConfig',
     'taggit',
     'ckeditor',
     'ckeditor_uploader',
     'error.apps.ErrorConfig',
+    'portfolio.apps.PortfolioConfig',
+    # 'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 处理media文件页面显示
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -130,9 +135,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]  # 不和具体app挂钩
 
-
+# 媒体文件设置
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# # 缩略图设置
+# THUMBNAIL_DEBUG = True
 
 # ckeditor设置
 CKEDITOR_UPLOAD_PATH = "uploads/"

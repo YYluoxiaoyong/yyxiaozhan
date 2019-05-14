@@ -27,6 +27,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('account/', include('account.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('portfolio/', include('portfolio.urls', namespace='portfolio')),
 ]
 
 if settings.DEBUG:

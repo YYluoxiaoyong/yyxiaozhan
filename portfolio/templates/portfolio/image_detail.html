@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}图片详情{% endblock %}
+{% block content %}
+    <div id="content">
+        <div class="container">
+            <div id="content">
+                <div id="breadcrumb"><!-- breadcrumb starts-->
+                    <div class="container">
+                        <div class="one-half">
+                            <h4>图片详情 - {{ object.title }}</h4>
+                        </div>
+                        <div class="one-half">
+                            <nav id="breadcrumbs"><!--breadcrumb nav starts-->
+                                <ul>
+                                    <li>You are here:</li>
+                                    <li><a href="{% url 'index' %}">Home</a></li>
+                                    <li>Single Project</li>
+                                </ul>
+                            </nav><!--breadcrumb nav ends -->
+                        </div>
+                    </div>
+                </div><!--breadcrumbs ends -->
+                <div class="container">
+                    <div class="one">
+                        <section class="flex-container">
+                            <div class="flexslider single-portfolio-item-slider bottom-margin">
+                                <ul class="slides round">
+                                    <li><img src="{{ MEDIA_URL }}{{ object.image }}" alt=" "/><a
+                                            href="{{ MEDIA_URL }}{{ object.image }}" class="product-item-preview"
+                                            data-rel="prettyPhoto"><i class="icon-zoom-in"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </section>
+                    </div>
+
+                    <div class="one-third">
+                        <h4>{{ object.title }}</h4>
+                        <p>作者：{{ object.user }}</p>
+                        <ul class="simple-list">
+                            <li><i class="icon-check-sign"></i>上传时间：{{ object.created }}</li>
+                            <li><i class="icon-check-sign"></i>图片类别：{{ object.category }}</li>
+                        </ul>
+                    </div>
+                    <div class="two-third">
+                        {{ object.description }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
